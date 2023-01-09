@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+/Users/meet/Documents/java/.metadata/.plugins/org.eclipse.jdt.core
+1303903523.index
+1262396950.index
+806706070.index

@@ -1,0 +1,8 @@
+package image;
+
+import 
+
+public class ImageProcessorGUI extends DrawingGUI{
+	
+	private ImageProcessor
+}

@@ -1,0 +1,23 @@
+
+public class EllipticalBlob extends Blob {
+	
+	
+	private double angle=0;
+	private double a=50,b=100;
+	
+	
+	public EllipticalBlob(double x ,double y,double a,double b){
+		super(x,y);
+		this.a=a;
+		this.b=b;
+		
+	}
+	
+	public void step() {
+		x=x+ a*Math.cos(angle)+100;
+		y=y+ b*Math.sin(angle)+50;
+		
+		angle+=1;
+	}
+	
+}

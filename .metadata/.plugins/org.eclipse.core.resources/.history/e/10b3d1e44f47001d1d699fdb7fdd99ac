@@ -1,0 +1,20 @@
+package image;
+
+import java.awt.image.BufferedImage;
+
+public class ImageProcessor {
+	private BufferedImage img;
+	
+	private ImageProcessor(BufferedImage img) {
+		this.img=img;
+		
+	}
+	 
+	public BufferedImage getImage(){
+		return img;
+	}
+	
+	public void setImage(BufferedImage img) {
+		this.img=img;
+	}
+}

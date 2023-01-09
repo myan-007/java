@@ -1,0 +1,23 @@
+
+public class FlowArrow extends Blob {
+
+	
+	public class Points{
+		int x,y;
+	}
+	private Points startPoint;
+	static Points endPoint;
+	public FlowArrow(double x,double y) {
+		super(x,y);
+	}
+	public static void getEndPoint(int x,int y) {
+		
+		System.out.print("Click Anywhere!!");
+		endPoint.x=x;
+		endPoint.y=y;
+	}
+	public void step() {
+		
+		
+	}
+}

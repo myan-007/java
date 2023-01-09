@@ -1,0 +1,133 @@
+
+import static java.lang.Math.toRadians;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
+
+import javax.swing.SwingUtilities;
+
+public class BlobGUI0 extends DrawingGUI {
+	
+	private static final int width=800,height=800;
+	private char blobType='0';
+	private BufferedImage img=loadImage("/Users/meet/Desktop/smile.png");
+	private double theta=0;
+	private ArrayList<Blob> blob;
+	public BlobGUI0() {
+		super("Animated Blob",width, height);
+		
+		blob = new ArrayList<Blob>();
+//		blob.setVelocity(0.5, 0.5);
+		startTimer(); //timer drives animation and it ticks every 100ms by default
+	}
+	
+	public void draw(Graphics g) {
+		
+		for(Blob blob : blob) {
+			blob.draw(g);
+		}
+		//ask blob to draw itself
+	}
+	
+	public void handleTimer() {
+		for(Blob blob : blob) {
+			blob.step();// move blob
+		}
+		repaint(); // refreshing UI
+	}
+
+	public void handleMousePress(int x ,int y) {
+		
+		System.out.println("X: "+x+" Y: "+y);
+		for(Blob blob:blob) {
+		if(blob.contains(x, y)) {
+			System.out.println("Back Off!!");
+			return;
+		}
+		}
+		if(blobType =='0') {
+			blob.add(new Blob(x,y));
+		}
+		else if(blobType =='b') {
+			blob.add(new Bouncer(x,y,width,height));
+		}
+		else if(blobType =='p') {
+			blob.add(new Pulsar(x,y));
+		}
+		else if(blobType =='t') {
+			blob.add(new Teleporter(x,y,width,height));
+		}
+		else if(blobType =='w') {
+			blob.add(new Wanderer(x,y));
+		}
+		else if(blobType =='u') {
+			blob.add(new WanderingPulse(x,y));
+		}
+		else if(blobType == 'i') {
+			blob.add(new StepWanderer(x,y));
+		}
+		else if(blobType == 'q') {
+			blob.add(new WanderingImage(x,y,img));
+		}
+		else if(blobType == 'c') {
+			blob.add(new EllipticalBlob(x,y,width/5,height/5,theta));
+		}
+		else if(blobType == 'e') {
+			
+			for(int i=0;i<20;i++) {
+			blob.add(new EllipticalBlob(x,y,width/5,height/10,theta));
+			}
+			
+		}
+		else {
+			System.err.println("Unknown BloB type!!" + blobType);	
+		}
+		System.out.println("New Blob created!!\nType: "+ blobType);
+		repaint();
+	}
+	
+	public void handleKeyPress(char k) {
+		
+		
+		System.out.println("Handling key is : "+k+"'");
+		if(k=='f') {
+			if(delay>1) delay /= 2;
+			setTimerDelay(delay);
+			System.out.println("Delay :" + delay);
+		}
+		else if(k=='s') {
+			delay *= 2;
+			setTimerDelay(delay);
+			System.out.println("Delay :" + delay);
+		}
+		else if(k=='.') {
+			theta+=10;
+			System.out.println("Theta increased to: "+theta);
+		}
+		else if(k==',') {
+			theta-=10;
+			System.out.println("Theta decreased to: "+theta);
+		}
+		else {
+			System.out.println("BlobType :"+k);
+			blobType=k;
+		}
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				
+				new BlobGUI0();
+			}
+		});
+	}
+	
+	
+}

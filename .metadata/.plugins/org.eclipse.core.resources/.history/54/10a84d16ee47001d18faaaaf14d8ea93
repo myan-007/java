@@ -1,0 +1,29 @@
+package image;
+
+import blob.DrawingGUI;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
+public class ColorDim{
+
+		public static void main(String[] args) {
+			
+			BufferedImage img = DrawingGUI.loadImage("/Users/meet/Desktop/snapshot.png");
+			int x=0,y=0;
+			
+			Color color = new Color(img.getRGB(x,y));
+			System.out.println("Original Color "+ color);
+			
+			int red = color.getRed()/2;
+			int green = color.getGreen()/2;
+			int blue = color.getBlue()/2;
+			
+			Color newColor = new Color(red,green,blue);
+			System.out.println("New color "+ newColor);
+			img.setRGB(x, y, newColor.getRGB());
+			
+			
+			
+		}
+}

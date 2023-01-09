@@ -1,0 +1,40 @@
+package image;
+
+import blob.DrawingGUI;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
+public class ColorDim{
+
+		BufferedImage img = DrawingGUI.loadImage("/Users/meet/Desktop/taj.jpeg");
+	
+		public void dim() {
+			for(int i=0;i<img.getHeight();i++) {
+				for(int j=0;j<img.getWidth();j++) {
+					Color color = new Color(img.getRGB(i,j));
+//					System.out.println("Original Color "+ color);
+					
+					int red = color.getRed()* 3/4;
+					int green = color.getGreen()* 3/4;
+					int blue = color.getBlue()* 3/4;
+					
+					Color newColor = new Color(red,green,blue);
+//					System.out.println("New color "+ newColor);
+					img.setRGB(i, j, newColor.getRGB());
+				}
+			}
+			
+			
+			
+		}
+		public static void main(String[] args) {
+			
+		
+			
+			
+			
+			
+			
+		}
+}

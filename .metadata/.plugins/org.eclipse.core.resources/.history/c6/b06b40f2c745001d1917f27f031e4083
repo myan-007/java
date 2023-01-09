@@ -1,0 +1,53 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.*;
+
+import javax.swing.SwingUtilities;
+
+public class AnimatedImage extends DrawingGUI{
+	
+	private static final int radius=5;
+	private static final int numBlobs=200000;
+	private static final int numToMove=10000;
+	
+	private ArrayList<Blob> blobs;
+	
+	public AnimatedImage(BufferedImage img) {
+		super("AnimatedImage",img.getHeight()*radius,img.getWidth()*radius);
+		
+		blobs = new ArrayList<Blob>();
+		for(int i=0;i<numBlobs;i++) {
+			int x = (int)(img.getWidth()*Math.random());
+			int y = (int)(img.getHeight()*Math.random());
+			
+			Color color = new Color(img.getRGB(x, y));
+			blobs.add(new WanderingPixel((x*radius),(y*radius),(int)(1+Math.random()*radius),color));
+			
+		}
+		startTimer();
+	}
+	
+	public void draw(Graphics g) {
+		
+		for(Blob blob: blobs) {
+			blob.draw(g);
+		}
+	}
+	
+	public void handleTimer() {
+		for(int i=0 ;i <numToMove;i++) {
+			blobs.get((int)(Math.random()*blobs.size())).step();
+		}
+		repaint();
+	}
+		
+	public static void main(String[] args) {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new AnimatedImage(loadImage("/Users/meet/Desktop/eiffel.jpeg"));
+			}
+		});
+	}
+}

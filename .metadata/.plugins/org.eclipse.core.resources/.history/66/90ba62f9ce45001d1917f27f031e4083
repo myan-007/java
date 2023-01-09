@@ -1,0 +1,22 @@
+
+public class CircularBlob extends Blob {
+	
+	private double radius=1;
+	private double angle=0;
+//	private double startX,startY;
+	
+	public CircularBlob(double a ,double b){
+		super(a,b);
+//		this.startX=startX;
+//		this.startY=startY;
+		
+	}
+	
+	public void step() {
+		dx = radius*Math.cos(angle);
+		dy = radius*Math.cos(angle);
+		
+		angle+=1;
+	}
+	
+}

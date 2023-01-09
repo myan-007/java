@@ -1,0 +1,47 @@
+package image;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import javax.swing.SwingUtilities;
+
+import blob.DrawingGUI; 
+
+public class ImageProcessorGUI extends DrawingGUI{
+	
+	private ImageProcessor proc;
+	
+	public ImageProcessorGUI(ImageProcessor proc) {
+		super("Image Processing",proc.getImage().getWidth(),proc.getImage().getHeight());
+		this.proc=proc;
+	}
+	
+	
+	public void draw(Graphics g) {
+		g.drawImage(proc.getImage(),0,0,null);
+	}
+	
+	public void handleKeyPress(char op) {
+		System.out.println("Handling key is "+op);
+		
+	if(op=='k') 
+	{ 
+		saveImage(proc.getImage(),"./snap.png","png");
+		
+		}
+	else {
+		System.out.println();
+		}
+	repaint();
+	}
+	
+	
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				BufferedImage baker = loadImage("/Users/meet/Desktop/taj.jpeg");
+				new ImageProcessorGUI(new ImageProcessor(baker));
+			}
+		});
+	}
+}

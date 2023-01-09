@@ -1,0 +1,29 @@
+
+import static java.lang.Math.*;
+
+public class EllipticalBlob extends Blob {
+	
+	
+	private double angle=0;
+	private double a=50,b=100;
+	public double theta=0;
+	
+	
+	public EllipticalBlob(double x ,double y,double a,double b,double theta){
+		super(x,y);
+		this.a=a;
+		this.b=b;
+		this.theta=theta;
+		
+	}
+	
+	public void step() {
+		x=x+ ((a*cos(theta)*cos(angle)) - (b*sin(angle)*sin(theta)));
+		y=y+ (a*cos(angle)*sin(theta) + b*sin(angle)*cos(theta));
+		if(angle == 360) {
+			angle=0;
+		}
+		else angle++;
+	}
+	
+}
